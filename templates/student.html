@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-2xl font-bold text-center mb-4">Welcome {{ name }} (Student)</h2>
+
+    <h3 class="text-xl font-semibold mb-3">Available Slots</h3>
+
+    <form method="POST">
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr class="bg-gray-200 font-semibold">
+              <th>ID</th>
+              <th>Faculty</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in slots %}
+            <tr class="hover">
+              <td>{{ s['id'] }}</td>
+              <td>{{ s['faculty_name'] }}</td>
+              <td>{{ s['date'] }}</td>
+              <td>{{ s['time'] }}</td>
+              <td>
+                <button name="slot_id" value="{{ s['id'] }}" type="submit" class="btn btn-primary btn-sm">Book</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+
+  <div class="flex justify-center gap-4">
+    <a href="{{ url_for('bookings') }}" class="btn btn-accent">View Confirmed Bookings</a>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary">Home</a>
+  </div>
+
+</div>
+{% endblock %}

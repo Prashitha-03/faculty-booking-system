@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Faculty Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+
+  <!-- Add Slot Form -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center">Welcome {{ name }} (Faculty)</h2>
+
+    <h3 class="text-xl font-semibold mb-3">Add Consultation Slot</h3>
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <input type="date" name="date" required class="input input-bordered w-full" />
+      </div>
+      <div>
+        <input type="time" name="time" required class="input input-bordered w-full" />
+      </div>
+      <div class="flex items-end">
+        <button type="submit" class="btn btn-primary w-full">Add Slot</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Slots Table -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h3 class="text-xl font-semibold mb-3">Your Slots</h3>
+    <div class="overflow-x-auto">
+      <table class="table w-full">
+        <thead>
+          <tr class="bg-gray-200 font-semibold">
+            <th>ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Booked By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in slots %}
+          <tr class="hover">
+            <td>{{ s['id'] }}</td>
+            <td>{{ s['date'] }}</td>
+            <td>{{ s['time'] }}</td>
+            <td>{% if s['booked_by'] %}{{ s['booked_by'] }}{% else %}<span class="badge badge-success">Available</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="flex justify-center gap-4">
+    <a href="{{ url_for('bookings') }}" class="btn btn-accent">View Confirmed Bookings</a>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary">Home</a>
+  </div>
+</div>
+{% endblock %}

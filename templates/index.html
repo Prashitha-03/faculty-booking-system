@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white rounded-xl shadow p-8 text-center space-y-4">
+  <h2 class="text-3xl font-bold">Welcome!</h2>
+  <div class="space-y-3">
+    <a href="{{ url_for('login') }}" class="btn btn-primary w-full">Login</a>
+    <a href="{{ url_for('register') }}" class="btn btn-secondary w-full">Register</a>
+    <a href="{{ url_for('bookings') }}" class="btn btn-accent w-full">View Confirmed Bookings</a>
+  </div>
+  <p class="text-sm text-gray-600 mt-4">
+    For testing, visit <code>/seed</code> to reset database (development only)
+  </p>
+</div>
+{% endblock %}
